@@ -1,0 +1,112 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Segmentasi {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+  <link rel="stylesheet" href="/static/assets/css/segmentations.css" type="text/css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">{% if title %}{{ title }}{% else %}Radiograf Utuh{% endif %}</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Segmentasi</li>
+                <li class="breadcrumb-item active" aria-current="page">{% if title %}{{ title }}{% else %}Radiograf Utuh{% endif %}</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div class="card-header">
+            <h3 class="mb-0">Unggah</h3>
+            <p class="text-sm mb-0">
+              Unggah gambar radiograf panoramik untuk melihat persebaran dan luasan kariesnya
+            </p>
+          </div>
+
+          <!-- Card body -->
+          <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data" >
+              {% csrf_token %}
+              <div class="">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="dropzone-wrapper position-relative">
+                        <div class="preview-zone">
+                          <img class="preview-zone-image" src="">
+                          <div class="d-flex justify-content-center align-items-center">
+                            <div class="preview-zone-default p-5">
+                              <i class="ni ni-cloud-upload-96 text-orange"></i>
+                              <p class="mb-0">Choose an image file or drag it here.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="file" name="img_logo" class="dropzone">
+                        <button type="button" class="btn btn-danger btn-xs remove-preview d-none">
+                          <i class="fa fa-times"></i> Hapus
+                        </button>
+                      </div>
+                      <div>
+                        <p class="preview-filename mb-0"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary pull-right">Unggah</button> 
+                    <!-- <small class="text-warning">*system under maintenance</small> -->
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        {% if caries_segmentation_result %}
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+              <h3 class="mb-0">Prediksi</h3>
+              <p class="text-sm mb-0">
+                Hasil prediksi segmentasi karies
+              </p>
+            </div>
+
+            <!-- Card body -->
+            <div class="card-body">
+              <img src="data:image/jpeg;base64,{{ caries_segmentation_result }}" class="img-fluid mx-auto" style="height:448px">
+              {% if caries_type_result %}
+                <p class="mt-1">Diagnosis: {% if caries_type_result != 'Normal' %}Caries{% else %}{% endif %} {{ caries_type_result }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+  <script src="/static/assets/js/segmentations.js"></script>
+{% endblock javascripts %}

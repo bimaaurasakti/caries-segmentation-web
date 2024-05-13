@@ -1,0 +1,63 @@
+.container {
+    padding: 50px 200px;
+}
+
+.box {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+}
+
+.box-tools {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.dropzone-wrapper {
+    border: 2px dashed #91b0b3;
+    color: #92b0b3;
+    position: relative;
+}
+
+.dropzone-desc {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 40%;
+    top: 50px;
+    font-size: 16px;
+}
+
+.dropzone,
+.dropzone:focus {
+    position: absolute;
+    outline: none !important;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+.dropzone-wrapper:hover,
+.dropzone-wrapper.dragover {
+    background: #ecf0f5;
+}
+
+.preview-zone {
+    text-align: center;
+}
+
+.preview-zone-image {
+    max-height: 474px;
+}
+
+.remove-preview {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
